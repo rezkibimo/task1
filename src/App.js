@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import axios from 'axios';
 
 const App = () => {
   const [data, setData] = useState({data: []});
@@ -7,24 +8,16 @@ const App = () => {
 
   const handleClick = async () => {
     setIsLoading(true);
-
     try {
-      const response = await fetch('http://universities.hipolabs.com/search?country=Australia', {
-        method: 'GET',
+      const {data} = await axios.get('https://reqres.in/api/users', {
         headers: {
           Accept: 'application/json',
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
+      console.log('data is: ', JSON.stringify(data, null, 4));
 
-      const result = await response.json();
-
-      console.log('result is: ', JSON.stringify(result, null, 4));
-
-      setData(result);
+      setData(data);
     } catch (err) {
       setErr(err.message);
     } finally {
@@ -42,12 +35,12 @@ const App = () => {
 
       {isLoading && <h2>Loading...</h2>}
 
-      {data.data.map(university => {
+      {data.data.map(person => {
         return (
-          <div key={university.name}>
-            <h2>{university.name}</h2>
-            <h2>{university.name}</h2>
-            <h2>{university.name}</h2>
+          <div key={person.id}>
+            <h2>{person.email}</h2>
+            <h2>{person.first_name}</h2>
+            <h2>{person.last_name}</h2>
             <br />
           </div>
         );
