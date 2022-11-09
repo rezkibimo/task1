@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+import './normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -29,37 +30,50 @@ const App = () => {
 
   console.log(data);
 
-
   return (
     <div className='container'>
+
       {err && <h2>{err}</h2>}
 
-      <button onClick={handleClick} className='btn btn-light btn-lg'>Fetch data</button>
-      <button className='btn btn-light btn-lg'>Clear data</button>
 
-      {isLoading && <button className='btn btn-primary' type="button" disabled><span className='spinner-grow spinner-grow-sm' role="status" aria-hidden="true"></span>Loading</button>}
+      <br></br>
 
-      <table className='table table-sm'>
+      <div className='container text-center'>
+        <div className='row'>
+          <div className='col'>
+            <button onClick={handleClick} className='btn btn-outline-dark'>Fetch</button>
+          </div>
+          <div className='col'>
+            <button className='btn btn-outline-dark'>Add</button>
+          </div>
+          <div className='col'>
+            <button className='btn btn-outline-dark'>Delete</button>
+          </div>
+        </div>
+      </div>
+      <br></br>
+      {isLoading && <p className='placeholder-glow'><span className='placeholder col-12 placeholder-sm bg-warning'><h5 className='Light'>&nbsp;Loading...</h5></span></p>}
+
+      <hr></hr>
+
+      <table className='table table-striped '>
         <thead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Country Code</th>
             <th scope="col">Country</th>
-            <th scope="col">Webpage</th>
+            <th scope="col">Domain</th>
           </tr>
         </thead>
         <tbody>
-            {data.map(university => {
-              return (
-                <tr key={university.name}>
-                  <td>{university.name}</td>
-                  <td>{university.alpha_two_code}</td>
-                  <td>{university.country}</td>
-                  <td>{university.web_page}</td>
-                </tr>
-              );
-            })}
-
+          {data.map(university => {
+            return (
+              <tr key={university.name}>
+                <td>{university.name}</td>
+                <td>{university.country} {university.alpha_two_code}</td>
+                <td><a href={university.web_pages}>{university.domains[0]}</a></td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
