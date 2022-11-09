@@ -14,6 +14,13 @@ root.render(
       </div>
     </nav>
     <App />
+    <br></br>
+    <div class="container">
+      <footer class="py-3 my-4">
+        <hr></hr>
+        <p class="text-center text-muted">End of Page</p>
+      </footer>
+    </div>
   </React.StrictMode>
 );
 

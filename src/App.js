@@ -30,19 +30,29 @@ const App = () => {
 
   console.log(data);
 
-  const deleteHandler = () => {
-    axios
-      .delete(data)
-      .then(response => {
-        console.log("deleted successfully!")
-      })
-  }
+  const addLastItem = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.get('http://universities.hipolabs.com/search?country=Australia', {
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      console.log(JSON.stringify(data, null, 4));
+
+      setData(data.splice(-1));
+    } catch (err) {
+      setErr(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className='container'>
 
       {err && <h2>{err}</h2>}
-
 
       <br></br>
 
@@ -52,7 +62,7 @@ const App = () => {
             <button onClick={handleClick} className='btn btn-outline-dark'>Fetch</button>
           </div>
           <div className='col'>
-            <button onClick={deleteHandler} className='btn btn-outline-dark'>Delete</button>
+            <button onClick={addLastItem} className='btn btn-outline-dark'>Add</button>
           </div>
           <div className='col'>
             <button onClick={() => window.location.reload(false)} className='btn btn-outline-dark'>Clear</button>
