@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <nav className='navbar bg-light'>
+      <div className='container-fluid'>
+        <span className='navbar-brand mb-0 h1'>University List</span>
+        <br></br>
+      </div>
+    </nav>
     <App />
   </React.StrictMode>
 );
