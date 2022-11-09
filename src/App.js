@@ -11,7 +11,7 @@ const App = () => {
   const handleClick = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get('https://reqres.in/api/users', {
+      const { data } = await axios.get('http://universities.hipolabs.com/search?country=Australia', {
         headers: {
           Accept: 'application/json',
         },
@@ -29,6 +29,7 @@ const App = () => {
 
   console.log(data);
 
+
   return (
     <div className='container'>
       {err && <h2>{err}</h2>}
@@ -41,18 +42,18 @@ const App = () => {
       <table className='table table-sm'>
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Name</th>
+            <th scope="col">Name</th>
+            <th scope="col">Name</th>
           </tr>
         </thead>
         <tbody>
-            {data.data.map(person => {
+            {data.data.map(university => {
               return (
-                <tr key={person.id}>
-                  <td>{person.email}</td>
-                  <td>{person.first_name}</td>
-                  <td>{person.last_name}</td>
+                <tr key={university.name}>
+                  <td>{university.name}</td>
+                  <td>{university.name}</td>
+                  <td>{university.name}</td>
                 </tr>
               );
             })}
