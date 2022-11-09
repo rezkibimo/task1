@@ -30,6 +30,14 @@ const App = () => {
 
   console.log(data);
 
+  const deleteHandler = () => {
+    axios
+      .delete(data)
+      .then(response => {
+        console.log("deleted successfully!")
+      })
+  }
+
   return (
     <div className='container'>
 
@@ -44,10 +52,10 @@ const App = () => {
             <button onClick={handleClick} className='btn btn-outline-dark'>Fetch</button>
           </div>
           <div className='col'>
-            <button className='btn btn-outline-dark'>Add</button>
+            <button onClick={deleteHandler} className='btn btn-outline-dark'>Delete</button>
           </div>
           <div className='col'>
-            <button className='btn btn-outline-dark'>Delete</button>
+            <button onClick={() => window.location.reload(false)} className='btn btn-outline-dark'>Clear</button>
           </div>
         </div>
       </div>
