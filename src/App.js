@@ -33,15 +33,24 @@ const App = () => {
   const addLastItem = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get('http://universities.hipolabs.com/search?country=Australia', {
-        headers: {
-          Accept: 'application/json',
-        },
-      });
+
+      setData(data.splice(-1));
 
       console.log(JSON.stringify(data, null, 4));
 
-      setData(data.splice(-1));
+    } catch (err) {
+      setErr(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const removeLastItem = async () => {
+    setIsLoading(true);
+    try {
+
+      console.log(data.pop());
+
     } catch (err) {
       setErr(err.message);
     } finally {
@@ -64,6 +73,13 @@ const App = () => {
           <div className='col'>
             <button onClick={addLastItem} className='btn btn-outline-dark'>Add</button>
           </div>
+          <div className='col'>
+            <button onClick={removeLastItem} className='btn btn-outline-dark'>Delete</button>
+          </div>
+        </div>
+      </div>
+      <div className='container text-center'>
+        <div className='row'>
           <div className='col'>
             <button onClick={() => window.location.reload(false)} className='btn btn-outline-dark'>Clear</button>
           </div>
