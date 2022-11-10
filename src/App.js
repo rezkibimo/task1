@@ -36,7 +36,7 @@ const App = () => {
 
       setData(data.splice(-1));
 
-      console.log(JSON.stringify(data, null, 4));
+      console.log(data.splice(-1));
 
     } catch (err) {
       setErr(err.message);
